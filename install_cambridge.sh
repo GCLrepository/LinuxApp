@@ -18,7 +18,7 @@ sudo mkdir -p $INSTALL_DIR
 
 # Přímý odkaz na stažení Cambridge One AppImage
 # (Pokud máte vlastní úložiště/Google Drive direct link, nahraďte URL níže)
-URL="https://desktop.cambridgeone.org/downloads/Cambridge%20One.AppImage"
+URL="http://nas01:5000/sharing/5M7YGCsO2"
 
 echo "[2/4] Stahuji aplikaci Cambridge One..."
 sudo wget -q --show-progress -O "$INSTALL_DIR/cambridge-one.AppImage" "$URL" || {
