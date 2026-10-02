@@ -11,6 +11,7 @@ echo "=================================================="
 echo "[1/4] Instaluji systémové závislosti (libfuse2)..."
 sudo apt-get update -y
 sudo apt-get install -y libfuse2 libgl1-mesa-dri curl wget
+sudo apt update && sudo apt install -y libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2
 
 # 2. Vytvoření instalační složky a stažení AppImage
 INSTALL_DIR="/opt/cambridge-one"
