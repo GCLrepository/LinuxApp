@@ -7,24 +7,23 @@ echo "=================================================="
 echo " Automatická instalace LibreOffice z Debian repozitářů "
 echo "=================================================="
 
-# 1. Aktualizace seznamu balíčků a přidání non-free repozitářů pro MS fonty
-echo "[1/3] Připravuji repozitáře a instaluji MS fonty..."
+# 1. Povolení contrib a non-free repozitářů a aktualizace
+echo "[1/3] Povoluji non-free repozitáře a instaluji MS fonty..."
+sudo sed -i 's/main$/main contrib non-free non-free-firmware/' /etc/apt/sources.list || true
 sudo apt-get update -y
 
-sudo apt-get install -y software-properties-common
-sudo add-apt-repository contrib non-free -y || true
-sudo apt-get update -y
+# Instalace pomocných nástrojů pro fonty
+sudo apt-get install -y wget curl fontconfig
 
 # Automatické schválení licence pro ttf-mscorefonts-installer (Calibri, Arial, Times New Roman...)
 echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
 
-# 2. Instalace LibreOffice, češtiny, slovníků a systémových závislostí
+# Instalace MS fontů
+sudo apt-get install -y ttf-mscorefonts-installer || echo "Varování: MS fonty se nepodařilo plně nainstalovat, pokračuji..."
+
+# 2. Instalace LibreOffice, češtiny a slovníků
 echo "[2/3] Instaluji LibreOffice v češtině a potřebné knihovny..."
 sudo apt-get install -y \
-    curl \
-    wget \
-    fontconfig \
-    ttf-mscorefonts-installer \
     libreoffice \
     libreoffice-l10n-cs \
     libreoffice-help-cs \
