@@ -4,43 +4,43 @@
 # Instalační skript pro výukové Linux aplikace na ChromeOS / ChromeOS Flex
 # ==============================================================================
 
-# Potlačení grafických dotazů při instalaci
 export DEBIAN_FRONTEND=noninteractive
 
 echo "=================================================="
-echo " Zahajuji instalaci výukových aplikací..."
+echo " 1. Aktualizace repozitářů APT"
 echo "=================================================="
-
-# 1. Aktualizace seznamu balíčků
-echo "[1/3] Aktualizuji repozitáře APT..."
 sudo apt-get update -y
 
-# 2. Instalace aplikací
-echo "[2/3] Instaluji aplikace a české lokalizace..."
-sudo apt-get install -y \
-  gimp \
-  gimp-l10n \
-  inkscape \
-  vlc \
-  libreoffice \
-  libreoffice-l10n-cs \
-  libreoffice-style-yaru-icon-theme \
-  basic256 || \
-sudo apt-get install -y \
-  gimp \
-  gimp-l10n \
-  inkscape \
-  vlc \
-  libreoffice \
-  libreoffice-l10n-cs \
-  basic256
+echo "=================================================="
+echo " 2. Instalace aplikací"
+echo "=================================================="
 
-# 3. Úklid dočasných souborů
-echo "[3/3] Provádím úklid balíčkovacího systému..."
+echo "--> Instalace GIMP (vč. češtiny)..."
+sudo apt-get install -y gimp gimp-l10n || echo "Chyba při instalaci GIMP"
+
+echo "--> Instalace Inkscape..."
+sudo apt-get install -y inkscape || echo "Chyba při instalaci Inkscape"
+
+echo "--> Instalace VLC..."
+sudo apt-get install -y vlc || echo "Chyba při instalaci VLC"
+
+echo "--> Instalace BASIC256..."
+sudo apt-get install -y basic256 || echo "Chyba při instalaci BASIC256"
+
+echo "--> Instalace LibreOffice a češtiny..."
+sudo apt-get install -y libreoffice libreoffice-l10n-cs || echo "Chyba při instalaci LibreOffice"
+
+echo "--> Pokus o instalaci ikonek Yaru pro LibreOffice..."
+sudo apt-get install -y libreoffice-style-yaru || \
+sudo apt-get install -y libreoffice-style-colibre || \
+echo "Ikonková sada Yaru není v repozitáři k dispozici, použije se výchozí vzhled."
+
+echo "=================================================="
+echo " 3. Úklid dočasných souborů"
+echo "=================================================="
 sudo apt-get autoremove -y
 sudo apt-get clean
 
 echo "=================================================="
-echo " INSTALACE DOKONČENA!"
-echo " Aplikace najdete v nabídce ChromeOS -> Aplikace Linuxu."
+echo " HOTOVO! Zkontrolujte výpis výše."
 echo "=================================================="
